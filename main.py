@@ -1,17 +1,27 @@
+'''sys обеспечивает доступ к некоторым функциям'''
 import sys
 
+'''импортируем виджеты из библиотеки PyQt5'''
 from PyQt5 import QtWidgets
+'''импортируем QApplication из библиотеки PyQt5.QtWidgets'''
 from PyQt5.QtWidgets import QApplication
+'''из файла ui.py импортируем класс'''
 from ui import Ui_MainWindow
 
-
+'''Создаём новый класс'''
 class Rof(QtWidgets.QMainWindow):
+    '''Инитилизация'''
     def __init__(self):
+        '''Функция super() используется для обращения к родительским классам'''
         super(Rof, self).__init__()
+        '''Создаём переменную с классом Ui_MainWindow из файла ui.py'''
         self.ui = Ui_MainWindow()
+        '''Берём из файла ui.py название функции setupUI'''
         self.ui.setupUi(self)
+        '''Создаём новую функцию'''
         self.init_UI()
-    ''''''
+
+    '''Отслеживание кнопок'''
     def init_UI(self):
         self.ui.push_1.clicked.connect(self.method_1)
         self.ui.push_2.clicked.connect(self.method_2)
@@ -32,7 +42,7 @@ class Rof(QtWidgets.QMainWindow):
         self.ui.push_clear.clicked.connect(self.method_clear)
         self.ui.push_del.clicked.connect(self.method_del)
 
-    '''метод добовление '''
+    '''кнопки'''
     def method_1(self):
         text = self.ui.label.text()
         self.ui.label.setText(text + "1")
@@ -102,7 +112,7 @@ class Rof(QtWidgets.QMainWindow):
 
     def method_equal(self):
         text = self.ui.label.text()
-
+        '''try except'''
         try:
             ans = eval(text)
             self.ui.label.setText(str(ans))
@@ -110,6 +120,7 @@ class Rof(QtWidgets.QMainWindow):
             self.ui.label.setText("Wrong Input")
 
 
+'''Запуск программы'''
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     main_window = Rof()
